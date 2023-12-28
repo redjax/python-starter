@@ -15,14 +15,29 @@ WORKDIR /app
 COPY requirements/requirements.ci.txt requirements.txt
 RUN python -m pip install -r requirements.txt
 
-FROM build AS dev
+FROM build AS stage
 
 WORKDIR /app
 
-COPY src/ tests/ noxfile.py tox.ini ruff.ci.toml ./
+COPY pyproject.toml \
+    pdm.lock \
+    src/ \
+    tests/ \
+    noxfile.py \
+    tox.ini \
+    ruff.ci.toml \
+    ./
 
-FROM build AS run
+# COPY src/ /app/src
+# COPY tests/ /app/tests
+# COPY noxfile.py /app/noxfile.py
+# COPY tox.ini /app/tox.ini
+# COPY ruff.ci.toml /app/ruff.ci.toml
+
+FROM stage AS run
 
 WORKDIR /app
 
-RUN python -m nox
+COPY --from=stage /app .
+
+RUN ["python", "-m", "nox"]

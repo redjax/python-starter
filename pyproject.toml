@@ -2,20 +2,15 @@
 name = "python-starter"
 version = "0.1.0"
 description = "Default template for PDM package"
-authors = [
-    {name = "redjax", email = "none@none.com"},
-]
+authors = [{ name = "redjax", email = "none@none.com" }]
 dependencies = []
 requires-python = "==3.11.*"
 readme = "README.md"
-license = {text = "MIT"}
+license = { text = "MIT" }
 
 
 [project.optional-dependencies]
-ci = [
-    "nox>=2023.4.22",
-    "tox>=4.11.4",
-]
+ci = ["nox>=2023.4.22", "tox>=4.11.4"]
 [tool.pdm]
 package-type = "application"
 
@@ -28,3 +23,7 @@ dev = [
     "nox>=2023.4.22",
     "tox>=4.11.4",
 ]
+
+[tool.pdm.scripts]
+
+build-ci-dockerfile = { shell = "docker build -t python-starter-tests . -f ci.Dockerfile" }
