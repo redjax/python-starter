@@ -1,0 +1,30 @@
+[project]
+name = "python-starter"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "redjax", email = "none@none.com"},
+]
+dependencies = []
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[project.optional-dependencies]
+ci = [
+    "nox>=2023.4.22",
+    "tox>=4.11.4",
+]
+[tool.pdm]
+package-type = "application"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "black>=23.12.1",
+    "ruff>=0.1.9",
+    "pytest>=7.4.3",
+    "pytest-xdist>=3.5.0",
+    "nox>=2023.4.22",
+    "tox>=4.11.4",
+]
