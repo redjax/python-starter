@@ -1,10 +1,22 @@
 import pkgutil
 import nox
+from pathlib import Path
 
 PYVER: str = "3.11"
 TEST_PYVERS: list[str] = ["3.12", "3.11"]
 
 PDM_VER: str = "2.11"
+
+REQUIREMENTS_OUTPUT_DIR: Path = Path("./requirements")
+
+if not REQUIREMENTS_OUTPUT_DIR.exists():
+    try:
+        REQUIREMENTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    except Exception as exc:
+        msg = Exception(f"Unable to create requirements export directory: '{REQUIREMENTS_OUTPUT_DIR}'. Details: {exc}")
+        print(msg)
+        
+        REQUIREMENTS_OUTPUT_DIR: Path = Path(".")
 
 nox.options.error_on_external_run = False
 nox.options.error_on_missing_interpreters = False
@@ -38,11 +50,11 @@ def run_linter(session: nox.Session):
 @nox.session(python=[PYVER], name="export", reuse_venv=True)
 def export_requirements(session: nox.Session):
     print("Exporting production requirements")
-    session.run("pdm", "export", "--prod", '-o', "requirements.txt", "--without-hashes", external=True)
+    session.run("pdm", "export", "--prod", '-o', f"{REQUIREMENTS_OUTPUT_DIR}/requirements.txt", "--without-hashes", external=True)
     print("Exporting development requirements")
-    session.run("pdm", "export", "-d", "-o", "requirements.dev.txt", "--without-hashes", external=True)
+    session.run("pdm", "export", "-d", "-o", f"{REQUIREMENTS_OUTPUT_DIR}/requirements.dev.txt", "--without-hashes", external=True)
     print("Exporting CI requirements")
-    session.run("pdm", "export", "--group", "ci", "-o", "requirements.ci.txt", "--without-hashes", external=True)
+    session.run("pdm", "export", "--group", "ci", "-o", f"{REQUIREMENTS_OUTPUT_DIR}/requirements.ci.txt", "--without-hashes", external=True)
     
 @nox.session(python=TEST_PYVERS, name="tests", reuse_venv=True)
 def run_tests(session: nox.Session):
