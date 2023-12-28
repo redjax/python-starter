@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from pytest import fixture
 
 @fixture
-def dummy_str() -> str:
-    return "dummy"
+def dummy_hello_str() -> str:
+    return "world"
