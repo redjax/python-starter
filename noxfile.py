@@ -28,13 +28,6 @@ if not REQUIREMENTS_OUTPUT_DIR.exists():
 nox.options.error_on_external_run = False
 nox.options.error_on_missing_interpreters = False
 
-if pkgutil.find_loader("pdm"):
-    PDM_EXTERNAL: bool = True
-else:
-    PDM_EXTERNAL: bool = False
-
-print(f"Detected PDM in environment: {PDM_EXTERNAL}")
-
 
 @nox.session(python=TEST_PYVERS, name="testenv", reuse_venv=True)
 @nox.parametrize("pdm_ver", [PDM_VER])
@@ -42,8 +35,8 @@ def setup_base_testenv(session: nox.Session, pdm_ver: str):
     session.install(f"pdm>={pdm_ver}")
 
     print("Installing development dependencies with PDM")
-    session.run("pdm", "sync")
-    session.run("pdm", "install", "-d", external=PDM_EXTERNAL)
+    session.run("pdm", "sync", external=True)
+    session.run("pdm", "install", "-d", external=True)
 
 
 @nox.session(python=[PYVER], name="lint", reuse_venv=True)
@@ -59,11 +52,11 @@ def run_linter(session: nox.Session):
             "I",
             "--fix",
             lint_path,
-            external=PDM_EXTERNAL,
+            external=True,
         )
 
         print(f"Formatting '{d}' with Black")
-        session.run("pdm", "run", "black", lint_path, external=PDM_EXTERNAL)
+        session.run("pdm", "run", "black", lint_path, external=True)
 
         print(f"Running ruff checks on '{d}' with --fix")
         session.run(
@@ -74,7 +67,7 @@ def run_linter(session: nox.Session):
             "ruff.ci.toml",
             lint_path,
             "--fix",
-            external=PDM_EXTERNAL,
+            external=True,
         )
 
 
@@ -88,7 +81,7 @@ def export_requirements(session: nox.Session):
         "-o",
         f"{REQUIREMENTS_OUTPUT_DIR}/requirements.txt",
         "--without-hashes",
-        external=PDM_EXTERNAL,
+        external=True,
     )
     print("Exporting development requirements")
     session.run(
@@ -98,7 +91,7 @@ def export_requirements(session: nox.Session):
         "-o",
         f"{REQUIREMENTS_OUTPUT_DIR}/requirements.dev.txt",
         "--without-hashes",
-        external=PDM_EXTERNAL,
+        external=True,
     )
     print("Exporting CI requirements")
     session.run(
@@ -109,7 +102,7 @@ def export_requirements(session: nox.Session):
         "-o",
         f"{REQUIREMENTS_OUTPUT_DIR}/requirements.ci.txt",
         "--without-hashes",
-        external=PDM_EXTERNAL,
+        external=True,
     )
 
 
@@ -125,5 +118,5 @@ def run_tests(session: nox.Session):
         "--tb=auto",
         "-v",
         "-rsXxfP",
-        external=PDM_EXTERNAL,
+        external=True,
     )
