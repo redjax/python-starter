@@ -1,18 +1,16 @@
 [project]
-name = "python-starter"
+name = "python_starter"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [{ name = "redjax", email = "none@none.com" }]
-dependencies = []
-requires-python = "==3.11.*"
+dependencies = ["dynaconf>=3.2.4"]
+requires-python = ">=3.11"
 readme = "README.md"
 license = { text = "MIT" }
 
 
 [project.optional-dependencies]
 ci = ["nox>=2023.4.22", "tox>=4.11.4"]
-[tool.pdm]
-package-type = "application"
 
 [tool.pdm.dev-dependencies]
 dev = [
@@ -27,3 +25,6 @@ dev = [
 [tool.pdm.scripts]
 
 build-ci-dockerfile = { shell = "docker build -t python-starter-tests . -f ci.Dockerfile" }
+
+start = { cmd = "python -m src.python_starter", env = { "ENV_FOR_DYNACONF" = "prod" } }
+start-dev = { cmd = "python -m src.python_starter", env = { "ENV_FOR_DYNACONF" = "dev" } }

@@ -83,6 +83,7 @@ def export_requirements(session: nox.Session):
         "--without-hashes",
         external=True,
     )
+    
     print("Exporting development requirements")
     session.run(
         "pdm",
@@ -93,17 +94,18 @@ def export_requirements(session: nox.Session):
         "--without-hashes",
         external=True,
     )
-    print("Exporting CI requirements")
-    session.run(
-        "pdm",
-        "export",
-        "--group",
-        "ci",
-        "-o",
-        f"{REQUIREMENTS_OUTPUT_DIR}/requirements.ci.txt",
-        "--without-hashes",
-        external=True,
-    )
+    
+    # print("Exporting CI requirements")
+    # session.run(
+    #     "pdm",
+    #     "export",
+    #     "--group",
+    #     "ci",
+    #     "-o",
+    #     f"{REQUIREMENTS_OUTPUT_DIR}/requirements.ci.txt",
+    #     "--without-hashes",
+    #     external=True,
+    # )
 
 
 @nox.session(python=TEST_PYVERS, name="tests", reuse_venv=True)
