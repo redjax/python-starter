@@ -5,7 +5,7 @@
 groups = ["default", "dev", "ci"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:9a840450fa62bc85a5dbe7aeaee29d1861756e347aa3bd912a0f040a4272bf52"
+content_hash = "sha256:9090045c8baf6f720eddddeda00df3e0a4b7411b65e4cd4bc6fd579dbb3d2f39"
 
 [[package]]
 name = "argcomplete"
@@ -109,6 +109,17 @@ groups = ["ci", "dev"]
 files = [
     {file = "distlib-0.3.8-py2.py3-none-any.whl", hash = "sha256:034db59a0b96f8ca18035f36290806a9a6e6bd9d1ff91e45a7f172eb17e51784"},
     {file = "distlib-0.3.8.tar.gz", hash = "sha256:1530ea13e350031b6312d8580ddb6b27a104275a31106523b8f123787f494f64"},
+]
+
+[[package]]
+name = "dynaconf"
+version = "3.2.4"
+requires_python = ">=3.8"
+summary = "The dynamic configurator for your Python Project"
+groups = ["default"]
+files = [
+    {file = "dynaconf-3.2.4-py2.py3-none-any.whl", hash = "sha256:858f9806fab2409c4f5442614c2605d4c4071d5e5153b0e7f24a225f27465aed"},
+    {file = "dynaconf-3.2.4.tar.gz", hash = "sha256:2e6adebaa587f4df9241a16a4bec3fda521154d26b15f3258fde753a592831b6"},
 ]
 
 [[package]]

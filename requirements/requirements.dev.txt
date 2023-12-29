@@ -9,6 +9,7 @@ click==8.1.7
 colorama==0.4.6
 colorlog==6.8.0
 distlib==0.3.8
+dynaconf==3.2.4
 execnet==2.0.2
 filelock==3.13.1
 iniconfig==2.0.0
