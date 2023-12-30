@@ -1,0 +1,25 @@
+---
+steps:
+  build:
+    image: python:3.11-slim
+    environment:
+      - PIP_CACHE_DIR=/root/.cache/pip
+      - PYPI_CACHE_DIR=/root/.cache/pypi
+    commands:
+      # - python -m pip install tox
+      - python -m pip install --user nox
+    failure: ignore
+    when:
+      - event: [pull_request, push]
+        branch: main
+
+  export-requirements:
+    image: python:3.11-slim
+    commands:
+      # - python -m pip install tox
+      - python -m pip install --user nox
+      # - python -m tox -e export
+      - python -m nox -s export
+    when:
+      - event: [pull_request, push]
+        branch: main

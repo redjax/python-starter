@@ -27,7 +27,6 @@ if not REQUIREMENTS_OUTPUT_DIR.exists():
 nox.options.error_on_external_run = False
 nox.options.error_on_missing_interpreters = False
 
-
 @nox.session(python=TEST_PYVERS, name="testenv", reuse_venv=True)
 @nox.parametrize("pdm_ver", [PDM_VER])
 def setup_base_testenv(session: nox.Session, pdm_ver: str):

@@ -1,0 +1,20 @@
+---
+steps:
+  test-311:
+    image: python:3.11-slim
+    commands:
+      - python -m pip install --user nox
+      - python -m nox -e test
+    when:
+      - event: [pull_request, push]
+
+  test-312:
+    image: python:3.12-slim
+    commands:
+      - python -m pip install --user tox
+      - python -m nox -e test
+    when:
+      branch: main
+
+depends_on:
+  - build

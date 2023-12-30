@@ -1,0 +1,14 @@
+---
+steps:
+  tox-lint:
+    image: python:3.11-slim
+    commands:
+      - python -m pip install --user nox
+      - python -m nox -e lint
+    when:
+      - event: [pull_request, push]
+        branch: [main, dev]
+    failure: ignore
+
+depends_on:
+  - build
