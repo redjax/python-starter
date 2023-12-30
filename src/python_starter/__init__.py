@@ -4,4 +4,4 @@ import sys
 
 sys.path.append(".")
 
-from .main import say_hi
+from .main import say_hi  # noqa:F401

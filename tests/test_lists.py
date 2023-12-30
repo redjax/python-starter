@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import pytest
 from pytest import mark
 from python_starter.utils.ex_utils import join_lists
 

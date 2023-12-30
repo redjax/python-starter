@@ -9,6 +9,7 @@ line-length = 88
 select = [
     "D",    ## pydocstyle
     "E",    ## pycodestyle
+    "F401", ## remove unused imports
     "I",    ## isort
     "I001", ## Unused imports
 ]
@@ -41,6 +42,7 @@ fixable = [
     "D", ## pydocstyle
     "E", ## pycodestyle-error
     # "F",  ## pyflakes
+    "F401", ## unused imports
     # "G",  ## flake8-logging-format
     "I", ## isort
     "N", ## pep8-naming

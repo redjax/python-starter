@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from dataclasses import asdict
-
 from python_starter import say_hi
 from python_starter.core import AppSettings
 from python_starter.system_info import get_os_type, get_processor, py_ver

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pytest import mark, xfail
+from pytest import mark
 
 @mark.hello
 def test_say_hello(dummy_hello_str: str):

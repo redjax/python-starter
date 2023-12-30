@@ -1,3 +1,3 @@
 from __future__ import annotations
 
-from .methods import join_lists
+from .methods import join_lists  # noqa:F401
