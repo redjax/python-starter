@@ -33,13 +33,12 @@ def setup_base_testenv(session: nox.Session, pdm_ver: str):
     session.install(f"pdm>={pdm_ver}")
 
     print("Installing development dependencies with PDM")
-    session.run("pdm", "sync", external=True)
-    session.run("pdm", "install", "-d", external=True)
+    session.run("pdm", "sync")
+    session.run("pdm", "install", "-d")
 
 
 @nox.session(python=[PYVER], name="lint", reuse_venv=True)
 def run_linter(session: nox.Session):
-    session.install("pdm")
     for d in LINT_PATHS:
         lint_path: Path = Path(d)
         print(f"Running ruff imports sort on '{d}'")
@@ -55,7 +54,7 @@ def run_linter(session: nox.Session):
         )
 
         print(f"Formatting '{d}' with Black")
-        session.run("pdm", "run", "black", lint_path, external=True)
+        session.run("pdm", "run", "black", lint_path)
 
         print(f"Running ruff checks on '{d}' with --fix")
         session.run(
