@@ -17,7 +17,7 @@ steps:
     image: python:3.11-slim
     commands:
       # - python -m pip install tox
-      - python -m pip install --user nox
+      - python -m pip install --user nox pdm
       # - python -m tox -e export
       - python -m nox -s export
     when:
