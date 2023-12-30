@@ -6,7 +6,8 @@ steps:
       - python -m pip install --user nox
       - python -m nox -e test
     when:
-      - event: [pull_request, push]
+      event: [pull_request, push]
+      branch: [main, dev]
 
   test-312:
     image: python:3.12-slim
@@ -14,7 +15,8 @@ steps:
       - python -m pip install --user tox
       - python -m nox -e test
     when:
-      branch: main
+      event: [pull_request, push]
+      branch: [main, dev]
 
 depends_on:
   - build

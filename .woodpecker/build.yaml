@@ -10,8 +10,8 @@ steps:
       - python -m pip install --user nox
     failure: ignore
     when:
-      - event: [pull_request, push]
-        branch: main
+      event: [pull_request, push]
+      branch: [main, dev]
 
   export-requirements:
     image: python:3.11-slim
@@ -21,5 +21,5 @@ steps:
       # - python -m tox -e export
       - python -m nox -s export
     when:
-      - event: [pull_request, push]
-        branch: main
+      event: [pull_request, push]
+      branch: [main, dev]
