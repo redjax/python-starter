@@ -39,6 +39,7 @@ def setup_base_testenv(session: nox.Session, pdm_ver: str):
 
 @nox.session(python=[PYVER], name="lint", reuse_venv=True)
 def run_linter(session: nox.Session):
+    session.install("pdm")
     for d in LINT_PATHS:
         lint_path: Path = Path(d)
         print(f"Running ruff imports sort on '{d}'")
