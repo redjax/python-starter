@@ -3,7 +3,12 @@ name = "python_starter"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [{ name = "redjax", email = "none@none.com" }]
-dependencies = ["dynaconf>=3.2.4"]
+dependencies = [
+    "dynaconf>=3.2.4",
+    "mkdocs>=1.5.3",
+    "mkdocs-gitbook>=0.0.1",
+    "mkdocs-material>=9.5.3",
+]
 requires-python = ">=3.11"
 readme = "README.md"
 license = { text = "MIT" }
@@ -28,3 +33,4 @@ build-ci-dockerfile = { shell = "docker build -t python-starter-tests . -f ci.Do
 
 start = { cmd = "python -m src.python_starter", env = { "ENV_FOR_DYNACONF" = "prod" } }
 start-dev = { cmd = "python -m src.python_starter", env = { "ENV_FOR_DYNACONF" = "dev" } }
+serve-mkdocs = { cmd = "mkdocs serve --dev-addr 0.0.0.0:8000" }
